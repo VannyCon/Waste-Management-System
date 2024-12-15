@@ -26,6 +26,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['report_violation'])) {
     $resident_name = htmlspecialchars($_POST['Resident_name']);
     $violators_name = htmlspecialchars($_POST['violators_name']);
+    $type_violation = htmlspecialchars($_POST['type_violation']);
     $description = htmlspecialchars($_POST['description']);
     $violators_location = htmlspecialchars($_POST['violators_location']);
     $latitude = htmlspecialchars($_POST['latitude']);
@@ -97,16 +98,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['report_violation'])) {
 
     // Insert report data into database
     $sql = "INSERT INTO tbl_resident_report (
-        violationID, resident_name, violators_name, description, 
+        violationID, resident_name, violators_name, type_violation, description, 
         violators_location, latitude, longitude, date, time, isActive
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "sssssssssi",
+        "ssssssssssi",
         $violationID,
         $resident_name,
         $violators_name,
+        $type_violation,
         $description,
         $violators_location,
         $latitude,
@@ -207,19 +209,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                 <input type="text" class="form-control" name="violators_name" placeholder="Enter a violator's name (optional)">
             </div>
 
-            <div class="form-group">
-                <label for="description"><b>REPORT DESCRIPTION</b></label>
-                <select class="form-control" name="description" id="description" required>
-                    <option value="" disabled selected hidden>Select Violation</option>
-                    <option value="Illegal Dumping">Illegal Dumping</option>
-                    <option value="Burning of Waste">Burning of Plastic</option>
-                </select>
-            </div>
+            <?php
+                // Query to fetch id and purok_name
+                $query1 = "SELECT `id`, `Violation` FROM `manage_violation` WHERE 1";
+                $result = $conn->query($query1);
+
+                // Start building the dropdown HTML with Bootstrap classes
+                echo '<label for="type_violation"><b>Type of Violation</b></label>';
+                // Open the database connection
+                echo '<select name="type_violation" id="type_violation" class="form-control mb-3">';
+                echo '<option value="">-- Select type_violation --</option>';
+
+                // Fetch rows and populate the dropdown
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . htmlspecialchars($row['Violation']) . '">' . htmlspecialchars($row['Violation']) . '</option>';
+                    }
+                }
+
+                echo '</select>';
+
+                // Close the database connection
+                ?>
 
             <div class="form-group">
-                <label for="violators_location"><b>VIOLATOR'S LOCATION</b></label>
-                <textarea class="form-control" name="violators_location" required placeholder="Enter Purok/Barangay"></textarea>
+                <label for="description"><b>Description</b></label>
+                <input type="text" class="form-control" name="description" placeholder="Enter the Description">
             </div>
+
+            <?php
+                // Query to fetch id and purok_name
+                $query = "SELECT `id`, `purok_name` FROM `purok` WHERE 1";
+                $result = $conn->query($query);
+
+                // Start building the dropdown HTML with Bootstrap classes
+                echo '<label for="purok"><b>VIOLATORS LOCATION</b></label>';
+                // Open the database connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                echo '<select name="violators_location" id="purok" class="form-control mb-3">';
+                echo '<option value="">-- Select Purok --</option>';
+
+                // Fetch rows and populate the dropdown
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . htmlspecialchars($row['purok_name']) . '">' . htmlspecialchars($row['purok_name']) . '</option>';
+                    }
+                }
+
+                echo '</select>';
+
+                // Close the database connection
+                ?>
+
 
             <input type="hidden" id="latitude" name="latitude" readonly required>
             <input type="hidden" id="longitude" name="longitude" readonly required>

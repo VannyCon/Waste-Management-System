@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 }
 
 // Prepare and execute the query
-$stmt = $conn->prepare("SELECT `id`, `violationID`, `resident_name`, `violators_name`, `description`, `latitude`, `longitude`, `date`, `time`, `admin_approval`, `isActive` FROM `tbl_resident_report` WHERE isActive = 1");
+$stmt = $conn->prepare("SELECT `id`, `violationID`, `resident_name`, `violators_name`, `type_violation`, `description`, `latitude`, `longitude`, `date`, `time`, `admin_approval`, `isActive` FROM `tbl_resident_report` WHERE isActive = 1");
 
 $stmt->execute();
 $result = $stmt->get_result();

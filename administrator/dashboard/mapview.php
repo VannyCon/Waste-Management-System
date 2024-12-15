@@ -233,7 +233,7 @@ fetch('mapdata_json.php')
     .then(response => response.json())
     .then(data => {
         data.forEach(loc => {
-            const { violationID, latitude, longitude, resident_name, description, date, time, admin_approval } = loc;
+            const { violationID, latitude, longitude, resident_name, type_violation, description, date, time, admin_approval } = loc;
 
             L.marker([latitude, longitude], { icon: violationIcon }).addTo(map)
                 .bindPopup(`
@@ -244,6 +244,7 @@ fetch('mapdata_json.php')
                                 violationID, 
                                 resident_name, 
                                 description, 
+                                type_violation,
                                 date, 
                                 time, 
                                 admin_approval
@@ -311,6 +312,7 @@ fetch('mapdata_json.php')
                         <p><strong>Time:</strong> ${data.time}</p>
                     </div>
                     <div class="col-md-6">
+                        <p><strong>Type Of Violation:</strong> ${data.type_violation}</p>
                         <p><strong>Description:</strong> ${data.description}</p>
                         <p><strong>Status:</strong> 
                             <span class="badge ${data.admin_approval == 1 ? 'bg-success' : 'bg-warning'}">

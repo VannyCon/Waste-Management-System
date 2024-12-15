@@ -133,55 +133,6 @@ require_once("templates/nav.php");
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
-<!-- Sidebar Structure -->
-<div class="quixnav">
-    <div class="quixnav-scroll">
-        <ul class="metismenu" id="menu">
-            <li class="nav-label first">Main Menu</li>
-            <!-- Dashboard Link -->
-            <li>
-                <a href="index.php"><i class="fa fa-map"></i><span class="nav-text">Dashboard</span></a>
-            </li>
-            <!-- Map View -->
-            <li>
-                <a href="mapview.php"><i class="fa fa-exclamation-triangle"></i><span class="nav-text">Map View</span></a>
-            </li>
-            <!-- Violation Management -->
-            <li>
-                <a href="resident_report.php"><i class="fa fa-flag"></i><span class="nav-text">Resident Reports</span></a>
-            </li>
-            <!-- Notifications & Alerts -->
-            <li>
-                <a href="enforcer_report.php"><i class="fa fa-users"></i><span class="nav-text">Enforcer Reports</span></a>
-            </li>
-            <!-- Paided Violation -->
-            <li>
-                <a href="paided_violation.php"><i class="fa fa-money"></i><span class="nav-text">Paided Violation</span></a>
-            </li>
-            <!-- Reports -->
-            <li>
-                <a href="report.php"><i class="fa fa-file-text"></i><span class="nav-text">Reports</span></a>
-            </li>
-            <!-- Users Dropdown -->
-            <li class="nav-item">
-                <a href="#usersDropdown" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-users"></i> <span class="nav-text">Users</span>
-                </a>
-                <ul class="collapse list-unstyled" id="usersDropdown">
-                    <!-- Resident -->
-                    <li>
-                        <a href="user.php"><i class="fa fa-user"></i> Resident</a>
-                    </li>
-                    <!-- Enforcement -->
-                    <li>
-                        <a href="enforce.php"><i class="fa fa-file-text"></i> Enforcement</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
-
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles mx-0">

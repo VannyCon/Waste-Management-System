@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close(); // Always close the first statement
 }
-$conn->close();
+
 ?>
 
 
@@ -145,19 +145,51 @@ $conn->close();
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="violators_location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="violators_location" name="violators_location" required>
-                </div>
+                <?php
+                // Query to fetch id and purok_name
+                $query1 = "SELECT `id`, `purok_name` FROM `purok` WHERE 1";
+                $result = $conn->query($query1);
 
-                <div class="mb-3">
-                    <label for="violation_type" class="form-label">Violation</label>
-                    <select class="form-control" name="violation_type" id="violation_type" required>
-                    <option value="" disabled selected hidden>Select Violation</option>
-                    <option value="Illegal Dumping">Illegal Dumping</option>
-                    <option value="Burning of Waste">Burning of Plastic</option>
-                </select>
-            </div>
+                // Start building the dropdown HTML with Bootstrap classes
+                echo '<label for="purok"><b> Location</b></label>';
+                // Open the database connection
+                echo '<select name="violators_location" id="purok" class="form-control mb-3">';
+                echo '<option value="">-- Select Purok --</option>';
+
+                // Fetch rows and populate the dropdown
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . htmlspecialchars($row['purok_name']) . '">' . htmlspecialchars($row['purok_name']) . '</option>';
+                    }
+                }
+
+                echo '</select>';
+
+                // Close the database connection
+                ?>
+
+                <?php
+                    // Query to fetch id and purok_name
+                    $query1 = "SELECT `id`, `Violation` FROM `manage_violation` WHERE 1";
+                    $result = $conn->query($query1);
+
+                    // Start building the dropdown HTML with Bootstrap classes
+                    echo '<label for="violation_type"><b>Report Violation</b></label>';
+                    // Open the database connection
+                    echo '<select name="violation_type" id="violation_type" class="form-control mb-3">';
+                    echo '<option value="">-- Select description --</option>';
+
+                    // Fetch rows and populate the dropdown
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . htmlspecialchars($row['Violation']) . '">' . htmlspecialchars($row['Violation']) . '</option>';
+                        }
+                    }
+
+                    echo '</select>';
+
+                    // Close the database connection
+                ?>
 
 
                 <div class="mb-3">

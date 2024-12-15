@@ -26,6 +26,10 @@ $sql0 = "SELECT `total_penalties`, `total_penalty_paid`, `total_penalty_unpaid`,
 $dashboard = $conn->query($sql0);
 $dashboard_data = $dashboard->fetch_assoc();
 
+$sql001 = "SELECT `total_penalties`, `total_penalty_paid`, `total_penalty_unpaid`, `total_unsolved`, `total_solved`, `total_report` FROM `penalty_summary` WHERE 1";
+$dashboard_totalrep = $conn->query($sql001);
+$dashboard_totalreps = $dashboard_totalrep->fetch_assoc();
+
 // Variables for card values
 $totalReports = $dashboard_data['total_report'] ?? 0;
 
@@ -189,7 +193,6 @@ foreach ($monthlyViolations as $month => $count) {
         </div>
     </div>
 </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -226,9 +229,6 @@ foreach ($monthlyViolations as $month => $count) {
     });
 </script>
 <!-- jQuery and Bootstrap JS (ensure you're loading Bootstrap and jQuery for this to work) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
     $(document).ready(function() {
         // Click event to open modal

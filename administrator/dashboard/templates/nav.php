@@ -5,14 +5,14 @@
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">Main Menu</li>
+                    <li class="nav-label first text-dark">Main Menu</li>
                     <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li> -->
                     <li><a href="index.php" aria-expanded="false"><i
                                 class="fa fa-map"></i><span class="nav-text">Dashboard</span></a>
                     </li>
                     <li><a href="mapview.php" aria-expanded="false"><i
-                                class="fa fa-exclamation-triangle"></i><span class="nav-text">Map View</span></a>
+                                class="fa fa-map-pin"></i><span class="nav-text">Map View</span></a>
                     </li>
                     
                     <li><a href="resident_report.php" aria-expanded="false"><i
@@ -33,6 +33,22 @@
                     <li><a href="report.php" aria-expanded="false"><i
                                 class="fa fa-print"></i><span class="nav-text">Reports</span></a>
                     </li>
+
+                    <!-- Users Dropdown -->
+                    <li class="nav-item">
+                        <a href="#manageDropdown" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
+                            <i class="fa fa-tasks"></i> <span class="nav-text">Manage</span>
+                        </a>
+                        <ul class="collapse list-unstyled" id="manageDropdown">
+                            <li>
+                            <a href="managepurok.php"><i class="fas fa-map-marker"></i> Add Purok</a>
+                            </li>
+                            <li>
+                            <a href="manageviolation.php"><i class="fas fa-exclamation-circle"></i> Add Violation</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     
                     <!-- Users Dropdown -->
                     <li class="nav-item">

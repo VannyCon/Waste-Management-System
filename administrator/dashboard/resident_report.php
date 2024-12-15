@@ -22,7 +22,7 @@ require_once("templates/headers.php");
 require_once("templates/nav.php");
 
 // Fetch records
-$sql = "SELECT `id`, `violationID`, `resident_name`, `violators_name`, `description`, `violators_location`, `latitude`, `longitude`, `date`, `time`, `admin_approval`, `isActive` FROM `tbl_resident_report` WHERE 1";
+$sql = "SELECT `id`, `violationID`, `resident_name`, `violators_name`, `type_violation`,  `description`, `violators_location`, `latitude`, `longitude`, `date`, `time`, `admin_approval`, `isActive` FROM `tbl_resident_report` WHERE 1";
 $result = $conn->query($sql);
 ?>
 
@@ -45,6 +45,7 @@ $result = $conn->query($sql);
                             <th><b style="color: black;">Violation ID</th>
                             <th><b style="color: black;">Resident Name</th>
                             <th><b style="color: black;">Violator's Name</th>
+                            <th><b style="color: black;">Type Of Violation</th>
                             <th><b style="color: black;">Description</th>
                             <th><b style="color: black;">Location</th>
                             <th><b style="color: black;">Date</th>
@@ -65,6 +66,7 @@ $result = $conn->query($sql);
                                     <td><?php echo $row['violationID']; ?></td>
                                     <td><?php echo $row['resident_name']; ?></td>
                                     <td><?php echo $row['violators_name']; ?></td>
+                                    <td><?php echo $row['type_violation']; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row['violators_location']; ?></td>
                                     <td><?php echo $row['date']; ?></td>
@@ -243,12 +245,10 @@ $result = $conn->query($sql);
 </div>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 
